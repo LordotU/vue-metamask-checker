@@ -1,0 +1,99 @@
+{
+  "name": "@metamask-checker/vue",
+  "version": "1.0.0",
+  "description": "Vue component for checking Metamask inpage provider object",
+  "keywords": [
+    "ethereum",
+    "metamask",
+    "vue",
+    "web3"
+  ],
+  "homepage": "https://github.com/LordotU/vue-metamask-checker#readme",
+  "bugs": {
+    "url": "https://github.com/LordotU/vue-metamask-checker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LordotU/vue-metamask-checker.git"
+  },
+  "license": "MIT",
+  "author": "Oleg Levshin <levshino@gmail.com>",
+  "main": "./dist/library.ssr.js",
+  "module": "./dist/library.esm.js",
+  "browser": "./dist/library.js",
+  "unpkg": "./dist/library.js",
+  "scripts": {
+    "build": "NODE_ENV=production yarn run dev",
+    "clean": "rm -rf ./build",
+    "dev": "yarn run clean && yarn rollup -c",
+    "prepare": "yarn run build",
+    "test": "yarn test:jest && yarn test:coverage",
+    "test:coverage": "cat ./__tests__/coverage/lcov.info | yarn coveralls",
+    "test:jest": "yarn jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/__tests__/coverage",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/__tests__/"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-vue"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/__tests__/setup.js",
+      "<rootDir>/__tests__/__mocks__/",
+      "<rootDir>/__tests__/coverage/"
+    ],
+    "testURL": "http://localhost/",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.vue$": "<rootDir>/node_modules/vue-jest"
+    },
+    "verbose": false
+  },
+  "dependencies": {
+    "@metamask-checker/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.0",
+    "@vue/test-utils": "^1.0.0-beta.31",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^25.1.0",
+    "coveralls": "^3.0.9",
+    "jest": "^25.1.0",
+    "jest-cli": "^25.1.0",
+    "jest-serializer-vue": "^2.0.2",
+    "rollup": "^1.31.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-vue": "^5.1.6",
+    "vue": "^2.6.11",
+    "vue-jest": "^3.0.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.11"
+  }
+}
