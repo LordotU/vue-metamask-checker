@@ -34,6 +34,9 @@
   "jest": {
     "collectCoverage": true,
     "coverageDirectory": "<rootDir>/__tests__/coverage",
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.*"
+    ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/build/",
       "<rootDir>/node_modules/",
@@ -90,7 +93,7 @@
     "rollup-plugin-terser": "^5.2.0",
     "rollup-plugin-vue": "^5.1.6",
     "vue": "^2.6.11",
-    "vue-jest": "^3.0.5",
+    "vue-jest": "^4.0.0-beta.2",
     "vue-template-compiler": "^2.6.11"
   },
   "peerDependencies": {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="metamask-checker">
     <slot
       v-if="isErrored"
       name="errored"
@@ -8,7 +8,7 @@
     <slot
       v-else-if="isChecked"
       name="checked"
-      :provider="provider"
+      :provider="$provider"
       :selectedAccount="selectedAccount"
       :selectedNetwork="selectedNetwork"
     />
@@ -60,8 +60,8 @@
     },
 
     created () {
-      this.provider = null
-      this.account = null
+      this.$provider = null
+      this.$account = null
     },
 
     beforeMount () {
@@ -75,13 +75,13 @@
 
     methods: {
       addProviderListeners () {
-        this.provider
+        this.$provider
           .on('networkChanged', this.check)
           .on('accountsChanged', this.check)
       },
 
       removeProviderListeners () {
-        (this.provider || { off: function () { return this }})
+        (this.$provider || { off: function () { return this }})
           .off('networkChanged', this.check)
           .off('accountsChanged', this.check)
       },
@@ -107,7 +107,7 @@
         } finally {
 
           if (! (resultError instanceof MetamaskNotFoundError)) {
-            this.provider = window.ethereum
+            this.$provider = window.ethereum
 
             this.removeProviderListeners()
             this.addProviderListeners()
@@ -117,7 +117,7 @@
             await this.onCheckError(resultError)
           } else {
             await this.onCheckSuccess(
-              this.provider,
+              this.$provider,
               result.selectedAccount,
               result.selectedNetwork,
             )
