@@ -15,6 +15,7 @@ const plugins = [
       'MetamaskNotFoundError',
     ]},
   }),
+  vue({ template: { optimizeSSR: true } }),
 ]
 
 if (isProd) {
@@ -26,27 +27,9 @@ export default [
     input: 'src/index.js',
     output: {
       format: 'esm',
-      file: 'build/library.esm.js',
+      file: 'build/index.js',
       sourcemap: ! isProd,
     },
-    plugins: [ ...plugins, vue() ],
+    plugins,
   },
-  {
-    input: 'src/index.js',
-    output: {
-      format: 'cjs',
-      file: 'build/library.ssr.js',
-      sourcemap: ! isProd,
-    },
-    plugins: [ ...plugins, vue({ template: { optimizeSSR: true } }) ],
-  },
-  {
-    input: 'src/wrapper.js',
-    output: {
-      format: 'iife',
-      file: 'build/library.js',
-      sourcemap: ! isProd,
-    },
-    plugins: [ ...plugins, vue() ],
-  }
 ]

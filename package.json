@@ -18,10 +18,7 @@
   },
   "license": "MIT",
   "author": "Oleg Levshin <levshino@gmail.com>",
-  "main": "./dist/library.ssr.js",
-  "module": "./dist/library.esm.js",
-  "browser": "./dist/library.js",
-  "unpkg": "./dist/library.js",
+  "main": "./build/index.js",
   "scripts": {
     "build": "NODE_ENV=production yarn run dev",
     "clean": "rm -rf ./build",
