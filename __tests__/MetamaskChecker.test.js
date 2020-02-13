@@ -30,6 +30,10 @@ describe('MetamaskChecker', () => {
 
   it('renders "default" slot when nothing happens', async () => {
     const wrapper = mount(MetamaskChecker, {
+      scopedSlots: {
+        errored: erroredSlot,
+        checked: checkedSlot,
+      },
       slots: {
         default: defaultSlot,
       },
@@ -42,6 +46,10 @@ describe('MetamaskChecker', () => {
     const wrapper = mount(MetamaskChecker, {
       scopedSlots: {
         errored: erroredSlot,
+        checked: checkedSlot,
+      },
+      slots: {
+        default: defaultSlot,
       },
     })
 
@@ -60,6 +68,10 @@ describe('MetamaskChecker', () => {
       },
       scopedSlots: {
         errored: erroredSlot,
+        checked: checkedSlot,
+      },
+      slots: {
+        default: defaultSlot,
       },
     })
 
@@ -77,6 +89,10 @@ describe('MetamaskChecker', () => {
       },
       scopedSlots: {
         errored: erroredSlot,
+        checked: checkedSlot,
+      },
+      slots: {
+        default: defaultSlot,
       },
     })
 
@@ -90,7 +106,11 @@ describe('MetamaskChecker', () => {
   it('renders "checked" slot when all ok with MetamaskInpageProvider', async () => {
     const wrapper = mount(MetamaskChecker, {
       scopedSlots: {
+        errored: erroredSlot,
         checked: checkedSlot,
+      },
+      slots: {
+        default: defaultSlot,
       },
     })
 
@@ -108,7 +128,11 @@ describe('MetamaskChecker', () => {
         account : ACCOUNT,
       },
       scopedSlots: {
+        errored: erroredSlot,
         checked: checkedSlot,
+      },
+      slots: {
+        default: defaultSlot,
       },
     })
 
