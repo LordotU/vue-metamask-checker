@@ -1,21 +1,3 @@
-<template>
-  <div id="metamask-checker">
-    <slot
-      v-if="isErrored"
-      name="errored"
-      :error="error"
-    />
-    <slot
-      v-else-if="isChecked"
-      name="checked"
-      :provider="$provider"
-      :selectedAccount="selectedAccount"
-      :selectedNetwork="selectedNetwork"
-    />
-    <slot v-else />
-  </div>
-</template>
-
 <script>
   import checkMetamask, { MetamaskNotFoundError } from '@metamask-checker/core'
 
@@ -131,6 +113,57 @@
 
         }
       }
+    },
+
+    render (h) {
+      const isComponent = vnode => !! vnode.componentOptions
+
+      let $slot
+
+      try {
+        [$slot] = this.$slots.default
+          .filter(vnode => isComponent(vnode) || vnode.tag || !! vnode.text.trim())
+
+        if (this.isErrored) {
+          [$slot] = this.$scopedSlots.errored({
+            error: this.error,
+          })
+        } else if (this.isChecked) {
+          [$slot] = this.$scopedSlots.checked({
+            provider: this.$provider,
+            selectedAccount: this.selectedAccount,
+            selectedNetwork: this.selectedNetwork,
+          })
+        }
+      } catch (error) {
+        console.error(error)
+      }
+
+      if (! $slot) {
+        throw new Error('Default, errored and checked slots must be specified!')
+      }
+
+      const elm = isComponent($slot)
+        ? $slot.componentOptions.Ctor
+        : $slot.tag
+
+      const props = isComponent($slot)
+        ? $slot.componentOptions.propsData
+        : {}
+
+      const children = isComponent($slot)
+        ? $slot.componentOptions.children
+        : $slot.children
+
+      return h(
+        elm,
+        {
+          ...$slot.data,
+          props,
+        },
+        children,
+      )
+
     },
 
   }
