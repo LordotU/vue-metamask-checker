@@ -60,7 +60,7 @@ npm test
     </div>
 
     <div id="loader">
-      Loader
+      Loader...
     </div>
   </MetamaskChecker>
 </template>
