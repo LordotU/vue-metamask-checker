@@ -28,7 +28,28 @@ describe('MetamaskChecker', () => {
 
   const checkedText = `Selected account ${ACCOUNT} in selected network ${NETWORK}`
 
-  it('renders "default" slot when nothing happens', async () => {
+  it('throws an error when default slot not specified', async () => {
+    expect(() => mount(MetamaskChecker)).toThrowError('Cannot determine slot for rendering!')
+
+    expect(() => mount(MetamaskChecker, {
+      scopedSlots: {
+        errored: erroredSlot,
+      },
+    })).toThrowError('Cannot determine slot for rendering!')
+    expect(() => mount(MetamaskChecker, {
+      scopedSlots: {
+        checked: checkedSlot,
+      },
+    })).toThrowError('Cannot determine slot for rendering!')
+    expect(() => mount(MetamaskChecker, {
+      scopedSlots: {
+        errored: erroredSlot,
+        checked: checkedSlot,
+      },
+    })).toThrowError('Cannot determine slot for rendering!')
+  })
+
+  it('renders "default" slot when nothing happens and destroys normally', async () => {
     const wrapper = mount(MetamaskChecker, {
       scopedSlots: {
         errored: erroredSlot,
@@ -40,6 +61,8 @@ describe('MetamaskChecker', () => {
     })
 
     expect(wrapper.contains('[id="loader"]')).toBe(true)
+
+    wrapper.destroy()
   })
 
   it('renders "errored" slot when something wrong with MetamaskInpageProvider', async () => {

@@ -140,7 +140,7 @@
       }
 
       if (! $slot) {
-        throw new Error('Default, errored and checked slots must be specified!')
+        throw new Error('Cannot determine slot for rendering!')
       }
 
       const elm = isComponent($slot)
